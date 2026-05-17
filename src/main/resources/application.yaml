@@ -1,3 +1,25 @@
 spring:
   application:
     name: point-of-sale
+  datasource:
+    url: jdbc:postgresql://localhost:5432/point-of-sale
+    username: admin
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: false
+
+security:
+  jwt:
+    secret-key: db1898d002e72ef4880db14acacae540e85048f0fa8a76d2294fd3e605a2db21
+
+custom:
+  jwt:
+    expiration-time: 3600000

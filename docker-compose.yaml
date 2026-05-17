@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  postgres-db:
+    # It is best practice to specify a version rather than 'latest' for stability
+    image: postgres:16
+    container_name: postgres_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 1234
+      # This tells Docker to automatically create this database for you
+      POSTGRES_DB: point-of-sale
+    ports:
+      # Maps your Windows port (left) to the Docker container port (right)
+      - "5432:5432"
+    volumes:
+      # Maps the container's data folder to a Docker volume so your data isn't lost on restart
+      - postgres_data:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "miftakhul348@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "1234"
+    ports:
+      - "8081:80"
+    depends_on:
+      - postgres-db
+
+volumes:
+  # Declares the volume named above
+  postgres_data:
