@@ -37,7 +37,7 @@ public class Variant {
     @Column(nullable = false, unique = true)
     private String sku;
 
-    private Boolean isActive;
+    private boolean isActive = true;
 
     @Column(nullable = false)
     private BigDecimal price;

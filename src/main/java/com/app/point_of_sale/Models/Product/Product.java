@@ -11,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import com.app.point_of_sale.Models.Category.Category;
 import com.app.point_of_sale.Models.Variant.Variant;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -48,6 +49,6 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<Variant> variants;
 }
